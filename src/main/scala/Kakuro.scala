@@ -10,15 +10,13 @@ object Kakuro extends App {
     def securedCandidates: Iterator[List[Int]] = candidates.filter(item => secure.subsetOf(item.toSet))
     //return them in a list
     def result: List[List[Int]] = securedCandidates.toList
-
   }
 
   case class ApproachInline(total: Int, addend: Int, secure: Set[Int] = Set.empty) {
-    def result: List[List[Int]] = (1 to 9).toList.combinations(addend).filter(item => item.sum == total).filter(item=>secure.subsetOf(item.toSet)).toList
+    def comb: List[List[Int]] = (1 to 9).toList.combinations(addend).filter(item => item.sum == total).filter(item=>secure.subsetOf(item.toSet)).toList
   }
 
-  val approach1 = Approach1(10, 3, Set(7))
-  println(approach1.result)
-  val approachInline = ApproachInline(10,3, Set(7))
-  println(approachInline.result)
+  case class Spaces(total: Int, addends: Int, secure: Set[Int] = Set.empty) {
+    def comb: List[List[Int]] = (1 to 9).toList.combinations(addends).filter(item => item.sum == total).filter(item=>secure.subsetOf(item.toSet)).toList
+  }
 }
